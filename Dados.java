@@ -3,42 +3,43 @@ package entidade;
 import java.util.Scanner;
 
 public class Dados {
-	String name;
-	String CPF;
-	double codigo = 50;
+	public String name;
+	public String CPF;
+	public int codigo;
+	public double saldo;
 	
-	public Dados (String name, String CPF, double codigo) {
+	private static int contador = 1;
+	
+	public Dados (String name, String CPF) {
 		this.name = name;
 		this.CPF = CPF;
-		this.codigo = GerarCodigo(codigo);
+		this.codigo = contador++;
 	}
- 
-	public double GerarCodigo(double codigo) {
-		this.codigo += codigo;
-		return codigo++;
-	}
+	public Dados() {}
 	
-	public void principal(Scanner sc) {
-		System.out.println("Digite seu Nome completo: ");
-		String name = sc.nextLine();
-		System.out.println("Digite o CPF:");
-		String CPF = sc.nextLine();
+	public void Deposito (Scanner sc, Dados dados) {
+		Dados contaExistente;
+		System.out.println("Digite o valor do deposito: ");
+		double valor = sc.nextDouble();
+		try {
+			if (valor > 0 ) {
+				System.out.println("Déposito realizado com sucesso!\n" + "Novo saldo na conta" );
+				toString();
+				} else {
+				System.out.println("O valor do deposito deve ser positivo");
+				}
+			} 
+			catch (Exception e) {
+			System.out.println("Erro ao processar o deposito.");
+			System.out.println("Certifique que digitou um valor válido e tente novamente");
+			sc.nextLine();
+			}
+		this.saldo += valor;
 	}
-	
-	public Dados CadastrarConta (Scanner sc, Dados dados) {
-		System.out.println("Digite seu Nome completo: ");
-		String name = sc.nextLine();
-		System.out.println("Digite o CPF:");
-		String CPF = sc.nextLine();
-		Dados conta = new Dados(name, CPF, codigo);
-		//Dados conta = new info(name, CPF, codigo);
-		System.out.println("Código da conta: " + codigo);
-		System.out.println("\nConta Cadastrada com Sucesso\n");
-		System.out.println("CONTA CADASTRADA: \n" + dados.toString());
-		return conta;
-	}
-	
 	public String toString() {
-		return "Nome: " + this.name + "\nCPF: " + this.CPF;
+		return "Nome: " + name +
+				"\nCPF: " + CPF + 
+				"\nCódigo da conta: " + codigo +
+				"\nSaldo : R$" + saldo;
 	}
 }
