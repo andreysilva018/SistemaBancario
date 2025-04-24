@@ -1,0 +1,125 @@
+package entidade;
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Dados {
+	public String name;
+	public String CPF;
+	public int codigo, indice;
+	
+	private static int contador = 1;
+	
+	public Dados (String name, String CPF) {
+		this.name = name;
+		this.CPF = CPF;
+		this.codigo = contador++;
+	}
+	public Dados() {}
+	
+	public void criacaoConta(Dados[] contas, int indice, Dados d, Scanner sc) {
+		LocalDate d01 = LocalDate.now();
+		String deseja;
+		boolean continuar = true;
+		while(continuar) {
+			System.out.println("Digite seu nome: ");
+			String name = sc.nextLine();
+			/*while(!name.matches("^[A-Za-zÀ-ÿ\\s]+$")) {
+				System.out.println("Nome inválido");
+				System.out.println("Digite um novamente (com apenas letras e espaços): ");
+				name = sc.nextLine();
+			}*/
+			System.out.println("Digite seu CPF: ");
+			String CPF = sc.nextLine();
+			/*while(!CPF.matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
+				System.out.println("CPF inválido.");
+				System.out.println("Digite novamente no formato correto (000.000.000-00): ");
+				CPF = sc.nextLine();
+			}*/
+			
+			System.out.println("\nConta criada: " + d01);
+			contas[d.indice] = new Dados(name, CPF);
+			d.indice++;
+			
+			for(int i = 0; i < d.indice; i++) {
+				System.out.println("Conta: " + contas[i]);
+				System.out.println("Conta codigo: " + contas[i].codigo);
+				d.codigo = contas[i].codigo;
+			}
+			
+			System.out.println("Deseja criar outra conta ? s/n");
+			deseja = sc.nextLine().toLowerCase();
+			if(deseja.equalsIgnoreCase("n")) {
+				break;
+			} 
+			if(deseja.equalsIgnoreCase("s")) {
+				
+			}
+		}
+		
+	}
+	
+ 	public void acessarConta(Dados[] contas, int indice, Dados dados, Scanner sc) {
+		int perguntaCodigo;
+		boolean continuar = true;
+		while(continuar) {
+			System.out.println("\n" + "\nDigite o codigo da conta ou digite '0' para sair do Programa");
+			perguntaCodigo = sc.nextInt();
+			Dados contaExistente = null;
+			if(perguntaCodigo == 0) {
+				break;
+			}
+			for(int i = 0; i < dados.indice; i++) {
+				if(perguntaCodigo == contas[i].codigo) {
+					contaExistente = contas[i];
+					break;
+				}
+			}
+			if(contaExistente != null) {
+				System.out.println("*Conta encontrada*\n" + "\n" + "BEM VINDO "  + "\n" + contaExistente);
+				System.out.println("Deseja encerrar o prgrama ou fazer o primeiro deposito ? \n" + "'X' = Encerarr programa || Depositar 'D'");
+				char Pergunta = sc.next().toUpperCase().charAt(0);
+				switch (Pergunta) {
+				case 'X': 
+					System.out.println("Aguarde, o programa será encerrado");
+					perguntaCodigo = 0;
+					continuar = false;
+					break;
+				
+				case 'D':
+					System.out.println(contaExistente);
+					System.out.println("Aguarde o sistema está em desenvolvimento");
+					break;
+				}
+			}
+			else{
+				System.out.println("Código inexistente. Tente novamente.");	
+			}
+		}
+	}
+	
+	public void teste (Scanner sc, Dados dados, Transacao t) {
+		Dados contaExistente;
+		System.out.println("Digite o valor do deposito: ");
+		double valor = sc.nextDouble();
+		try {
+			if (valor > 0 ) {
+				System.out.println("Déposito realizado com sucesso!\n" + "Novo saldo na conta" );
+				toString();
+				} else {
+				System.out.println("O valor do deposito deve ser positivo");
+				}
+			} 
+			catch (Exception e) {
+			System.out.println("Erro ao processar o deposito.");
+			System.out.println("Certifique que digitou um valor válido e tente novamente");
+			sc.nextLine();
+			}
+		t.Saldo += valor;
+	}
+	public String toString() {
+		return "Nome: " + name +
+				"\nCPF: " + CPF + 
+				"\nCódigo da conta: " + codigo;
+	}
+}
