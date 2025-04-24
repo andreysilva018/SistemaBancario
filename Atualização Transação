@@ -1,0 +1,37 @@
+package entidade;
+
+import java.util.Scanner;
+import Main.Programa;
+
+public class Transacao {
+	Scanner sc = new Scanner(System.in);
+	public double Saldo, deposito, depositoRetirado;
+	public char pergunta;
+	
+	public void adicionaDeposito (double Saldo) {
+		this.Saldo = Saldo + deposito;
+	}
+	
+	public void subtrairDeposito (double Saldo) {
+		this.Saldo = Saldo + depositoRetirado;
+	}
+	
+	public void Deposito (Scanner sc) {
+		System.out.println("Digite o valor do deposito: ");
+		double valor = sc.nextDouble();
+		try {
+			if (valor > 0 ) {
+				System.out.println("Déposito realizado com sucesso!\n" + "Novo saldo na conta" );
+				toString();
+				} else {
+				System.out.println("O valor do deposito deve ser positivo");
+				}
+			} 
+			catch (Exception e) {
+			System.out.println("Erro ao processar o deposito.");
+			System.out.println("Certifique que digitou um valor válido e tente novamente");
+			sc.nextLine();
+			}
+		this.Saldo += valor;
+	}
+}
