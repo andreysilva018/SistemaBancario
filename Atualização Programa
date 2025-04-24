@@ -1,0 +1,58 @@
+package Main;
+import java.time.LocalDate;
+import java.util.Locale;
+import java.util.Scanner;
+
+import entidade.Dados;
+import entidade.Transacao;
+
+
+public class Programa {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Locale.setDefault(Locale.US);
+		LocalDate d01 = LocalDate.now();
+		Dados d = new Dados();
+		Dados[] contas = new Dados[100];
+		Transacao t = new Transacao();
+	
+		int pergunta;
+		
+		System.out.println("-----/ Sistema Bancario /-----/ Criando Conta Bancária /-----");
+		/*System.out.println("Deseja entar com uma conta existente: -- Digite 1 -- " + "Deseja criar uma conta: -- Digite 2 -- " + "\n------/ Sair do Programa: -- Digite 0 -- ");
+		pergunta = sc.nextInt();
+		sc.nextLine();*/
+		System.out.println(" ---- Primeiro teste do metodo criação de conta ----");
+		/*while(true) {
+			System.out.println("Digite seu nome: ");
+			String name = sc.nextLine();
+			/*while(!name.matches("^[A-Za-zÀ-ÿ\\s]+$")) {
+				System.out.println("Nome inválido");
+				System.out.println("Digite um novamente (com apenas letras e espaços): ");
+				name = sc.nextLine();
+			}
+			System.out.println("Digite seu CPF: ");
+			String CPF = sc.nextLine();
+			while(!CPF.matches("^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$")) {
+				System.out.println("CPF inválido.");
+				System.out.println("Digite novamente no formato correto (000.000.000-00): ");
+				CPF = sc.nextLine();
+			}
+			
+			contas[d.indice] = new Dados(name, CPF);
+			
+			System.out.println("Deseja criar outra conta ? s/n");
+			if(sc.nextLine().equalsIgnoreCase("n")) {
+				break;
+			}
+		}
+		for(int i = 0; i < d.indice; i++) {
+			System.out.println("\nConta criada: " + d01);
+			System.out.println("Conta: " + contas[i]);
+		}*/
+		
+		d.acessarConta(contas, d.indice, d, sc);
+		System.out.println("/-----------------/ FIM DO PROGRAMA /-------------------/");
+		sc.close();
+	}
+}
